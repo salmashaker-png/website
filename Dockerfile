@@ -1,5 +1,12 @@
-FROM ubuntu/apache2
+FROM node:18-alpine
 
-# Copy your HTML file
-COPY . /var/www/html/
+WORKDIR /app
 
+COPY package*.json ./
+RUN npm install
+
+COPY . .
+
+EXPOSE 3000
+
+CMD ["npm", "start"]
