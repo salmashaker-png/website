@@ -1,12 +1,9 @@
-FROM node:18-alpine
+FROM ubuntu
 
-WORKDIR /app
+RUN apt-get update && apt-get install -y apache2
 
-COPY package*.json ./
-RUN npm install
+ADD index.html /var/www/html/
 
-COPY . .
+EXPOSE 80
 
-EXPOSE 3000
-
-CMD ["npm", "start"]
+ENTRYPOINT ["apachectl", "-D", "FOREGROUND"]
